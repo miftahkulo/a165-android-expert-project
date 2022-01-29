@@ -4,12 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class ListTourismResponse(
 
+	@field:SerializedName("places")
+	val places: List<TourismResponse>? = null,
+
+	@field:SerializedName("count")
+	val count: Int? = null,
+
 	@field:SerializedName("error")
-    val error: Boolean,
+	val error: Boolean? = null,
 
 	@field:SerializedName("message")
-    val message: String,
-
-    @field:SerializedName("places")
-    val places: List<TourismResponse>
+	val message: String? = null
 )
