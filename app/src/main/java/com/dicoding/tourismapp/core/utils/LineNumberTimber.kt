@@ -1,0 +1,9 @@
+package com.dicoding.tourismapp.core.utils
+
+import timber.log.Timber
+
+class LineNumberTimber: Timber.DebugTree() {
+    override fun createStackElementTag(element: StackTraceElement): String? {
+        return "(${element.fileName}:${element.lineNumber})#${element.methodName}>>"
+    }
+}

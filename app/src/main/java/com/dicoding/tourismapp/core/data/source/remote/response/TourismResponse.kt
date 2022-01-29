@@ -3,28 +3,28 @@ package com.dicoding.tourismapp.core.data.source.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class TourismResponse(
-    @field:SerializedName("image")
-    val image: String? = null,
-
-    @field:SerializedName("address")
-    val address: String? = null,
-
-    @field:SerializedName("like")
-    val like: Int? = null,
-
-    @field:SerializedName("latitude")
-    val latitude: Double? = null,
+    @field:SerializedName("id")
+    val id: String,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    val name: String,
 
     @field:SerializedName("description")
-    val description: String? = null,
+    val description: String,
 
-    @field:SerializedName("id")
-    val id: Int? = null,
+    @field:SerializedName("address")
+    val address: String,
 
     @field:SerializedName("longitude")
-    val longitude: Double? = null
+    val longitude: Double,
+
+    @field:SerializedName("latitude")
+    val latitude: Double,
+
+    @field:SerializedName("like")
+    val like: Int,
+
+    @field:SerializedName("image")
+    val image: String
 )
 

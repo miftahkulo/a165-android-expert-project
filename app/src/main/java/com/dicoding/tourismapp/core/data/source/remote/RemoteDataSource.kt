@@ -9,6 +9,7 @@ import com.dicoding.tourismapp.core.data.source.remote.retrofit.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class RemoteDataSource private constructor(private val apiService: ApiService) {
     companion object {
@@ -23,6 +24,8 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
     fun getAllTourism(): LiveData<ApiResponse<List<TourismResponse>>> {
         val resultData = MutableLiveData<ApiResponse<List<TourismResponse>>>()
+
+        //get data from remote api
         val client = apiService.getList()
         client.enqueue(object : Callback<ListTourismResponse> {
             override fun onResponse(

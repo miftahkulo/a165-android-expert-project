@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class ApiConfig {
@@ -19,22 +20,31 @@ class ApiConfig {
             else
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
 
+//            val loggingInterceptor = HttpLoggingInterceptor { message ->
+//                Timber.v(message)
+//            }.apply {
+//                level = if (BuildConfig.DEBUG)
+//                    HttpLoggingInterceptor.Level.BODY
+//                else
+//                    HttpLoggingInterceptor.Level.NONE
+//            }
+
             val builder = OkHttpClient.Builder()
             builder
                 .readTimeout(180, TimeUnit.SECONDS)
                 .writeTimeout(180, TimeUnit.SECONDS)
                 .connectTimeout(180, TimeUnit.SECONDS)
                 .interceptors()
-                .add {
+                .add{
                     it.proceed(
                         it.request()
                             .newBuilder()
-                            // header to every request
                             //.addHeader("Authorization", BuildConfig.API_KEY)
                             .build()
                     )
                 }
             val client = builder
+                .addInterceptor(loggingInterceptor)
                 .addInterceptor(
                     ChuckerInterceptor.Builder(context)
                         .collector(ChuckerCollector(context))
@@ -43,14 +53,12 @@ class ApiConfig {
                         .alwaysReadResponseBody(false)
                         .build()
                 )
-                .addInterceptor(loggingInterceptor)
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(
                     GsonConverterFactory.create(
-                        // convert any null request
                         GsonBuilder().serializeNulls().create()
                     )
                 )
