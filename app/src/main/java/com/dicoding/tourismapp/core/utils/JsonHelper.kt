@@ -20,7 +20,7 @@ class JsonHelper(private val context: Context) {
         return jsonString
     }
 
-    fun loadData(): List<TourismResponse> {
+/*    fun loadData(): List<TourismResponse> {
         val list = ArrayList<TourismResponse>()
         val responseObject = JSONObject(parsingFileToString().toString())
         val listArray = responseObject.getJSONArray("places")
@@ -49,6 +49,6 @@ class JsonHelper(private val context: Context) {
             list.add(courseResponse)
         }
         return list
-    }
+    }*/
 }
 
