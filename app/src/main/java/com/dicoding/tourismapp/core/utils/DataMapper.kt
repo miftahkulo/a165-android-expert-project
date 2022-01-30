@@ -9,14 +9,14 @@ object DataMapper {
         val tourismList = ArrayList<TourismEntity>()
         input.map {
             val tourism = TourismEntity(
-                tourismId = it.id,
-                description = it.description,
-                name = it.name,
-                address = it.address,
-                latitude = it.latitude,
-                longitude = it.longitude,
-                like = it.like,
-                image = it.image,
+                tourismId = it.id.toString(),
+                description = it.description ?: "",
+                name = it.name ?: "",
+                address = it.address ?: "",
+                latitude = it.latitude ?: 0.0,
+                longitude = it.longitude ?: 0.0,
+                like = it.like ?: 0,
+                image = it.image ?: "",
                 isFavorite = false
             )
             tourismList.add(tourism)
