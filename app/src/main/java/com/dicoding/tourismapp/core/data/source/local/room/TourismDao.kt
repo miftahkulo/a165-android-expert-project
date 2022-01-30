@@ -18,5 +18,5 @@ interface TourismDao {
     suspend fun insertTourism(tourism: List<TourismEntity>)
 
     @Update
-    fun updateFavoriteTourism(tourism: TourismEntity)
+    suspend fun updateFavoriteTourism(tourism: TourismEntity)
 }

@@ -9,7 +9,7 @@ class TourismInteractor(private val tourismRepository: ITourismRepository) : Tou
 
     override fun getAllTourism() = tourismRepository.getAllTourism()
     override fun getFavoriteTourism() = tourismRepository.getFavoriteTourism()
-    override fun setFavoriteTourism(tourism: Tourism, state: Boolean) =
+    override suspend fun setFavoriteTourism(tourism: Tourism, state: Boolean) =
         tourismRepository.setFavoriteTourism(tourism, state)
 
 }

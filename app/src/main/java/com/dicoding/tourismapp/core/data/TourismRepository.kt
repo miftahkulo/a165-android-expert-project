@@ -1,21 +1,18 @@
 package com.dicoding.tourismapp.core.data
 
-import androidx.lifecycle.map
 import com.dicoding.tourismapp.core.data.source.local.LocalDataSource
 import com.dicoding.tourismapp.core.data.source.remote.RemoteDataSource
 import com.dicoding.tourismapp.core.data.source.remote.network.ApiResponse
 import com.dicoding.tourismapp.core.data.source.remote.response.TourismResponse
 import com.dicoding.tourismapp.core.domain.model.Tourism
 import com.dicoding.tourismapp.core.domain.repository.ITourismRepository
-import com.dicoding.tourismapp.core.utils.AppExecutors
 import com.dicoding.tourismapp.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class TourismRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val localDataSource: LocalDataSource
 ) : ITourismRepository {
 
     companion object {
@@ -24,11 +21,10 @@ class TourismRepository private constructor(
 
         fun getInstance(
             remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
+            localData: LocalDataSource
         ): TourismRepository =
             instance ?: synchronized(this) {
-                instance ?: TourismRepository(remoteData, localData, appExecutors)
+                instance ?: TourismRepository(remoteData, localData)
             }
     }
 
@@ -60,9 +56,9 @@ class TourismRepository private constructor(
             DataMapper.mapEntitiesToDomain(it)
         }
 
-    override fun setFavoriteTourism(tourism: Tourism, state: Boolean) {
+    override suspend fun setFavoriteTourism(tourism: Tourism, state: Boolean) {
         val tourismEntity = DataMapper.mapDomainToEntity(tourism)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteTourism(tourismEntity, state) }
+        localDataSource.setFavoriteTourism(tourismEntity, state)
     }
 }
 

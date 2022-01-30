@@ -23,7 +23,7 @@ object Injection {
         val localDataSource = LocalDataSource.getInstance(database.tourismDao())
         val appExecutors = AppExecutors()
 
-        return TourismRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
+        return TourismRepository.getInstance(remoteDataSource, localDataSource)
     }
 
     fun provideTourimsUseCase(context: Context) : TourismUseCase {
