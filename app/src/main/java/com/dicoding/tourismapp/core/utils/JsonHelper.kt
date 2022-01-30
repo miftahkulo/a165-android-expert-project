@@ -2,8 +2,6 @@ package com.dicoding.tourismapp.core.utils
 
 import android.content.Context
 import com.dicoding.tourismapp.R
-import com.dicoding.tourismapp.core.data.source.remote.response.TourismResponse
-import org.json.JSONObject
 import java.io.IOException
 
 class JsonHelper(private val context: Context) {

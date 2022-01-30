@@ -1,7 +1,5 @@
 package com.dicoding.tourismapp.core.domain.usecase
 
-import androidx.lifecycle.LiveData
-import com.dicoding.tourismapp.core.data.Resource
 import com.dicoding.tourismapp.core.domain.model.Tourism
 import com.dicoding.tourismapp.core.domain.repository.ITourismRepository
 
